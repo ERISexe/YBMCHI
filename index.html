@@ -1,0 +1,634 @@
+<html><head><base href="." target="_blank"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>YourBodyMyChoiceHandmaidenInu</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+ /* Add these new styles right at the start of your existing styles */
+        .warning-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .warning-content {
+            background-color: #000;
+            padding: 2rem;
+            border: 2px solid #ff0066;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .warning-button {
+            background: #ff0066;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-family: 'VT323', monospace;
+            font-size: 1.2em;
+        }
+
+        .warning-button:hover {
+            background: #ff1a75;
+        }
+
+        .animations-disabled .crt::before,
+        .animations-disabled .crt::after,
+        .animations-disabled .corrupted,
+        .animations-disabled .glitch-text::before,
+        .animations-disabled .glitch-text::after,
+        .animations-disabled .token-price,
+        .animations-disabled .feature-card:hover,
+        .animations-disabled .nft-card:hover img {
+            animation: none !important;
+        }
+:root {
+    --primary: #ff0066;
+    --secondary: #00ff99;
+    --accent: #ff00ff;
+    --text: #00ff00;
+    --dark: #000000;
+    --glitch: #0000ff;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    margin: 0;
+    font-size: 23px; /* Add this line */
+    padding: 0;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--dark);
+    text-shadow: 2px 2px var(--glitch);
+    overflow-x: hidden;
+}
+
+.crt::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.crt::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+    pointer-events: none;
+    z-index: 999;
+    animation: scanline 10s linear infinite;
+}
+
+@keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+.header {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    padding: 2rem;
+    text-align: center;
+    animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+    2%, 64% {
+        transform: translate(2px,0) skew(0deg);
+    }
+    4%, 60% {
+        transform: translate(-2px,0) skew(0deg);
+    }
+    62% {
+        transform: translate(0,0) skew(5deg); 
+    }
+}
+
+.nav {
+    background: rgba(0,0,0,0.8);
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--secondary);
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav a:hover {
+    color: var(--accent);
+    animation: flicker 0.5s infinite;
+}
+
+@keyframes flicker {
+    0% {opacity: 1;}
+    50% {opacity: 0.5;}
+    100% {opacity: 1;}
+}
+
+.main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid var(--accent);
+    animation: borderFlash 2s infinite;
+}
+
+@keyframes borderFlash {
+    0% {border-color: var(--primary);}
+    50% {border-color: var(--secondary);}
+    100% {border-color: var(--primary);}
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.feature-card {
+    background: rgba(0,0,0,0.7);
+    padding: 1.5rem;
+    border: 1px solid var(--text);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: "";
+    position: absolute;
+    top: var(--y, 50%);
+    left: var(--x, 50%);
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle closest-side, rgba(0, 255, 0, 0.2), transparent);
+    transition: width 0.5s, height 0.5s;
+}
+
+.feature-card:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.feature-card:hover {
+    transform: scale(1.05);
+    background: rgba(0,255,0,0.1);
+    box-shadow: 0 0 15px var(--text);
+}
+
+.footer {
+    background: var(--dark);
+    color: var(--text);
+    text-align: center;
+    padding: 2rem;
+    border-top: 2px solid var(--accent);
+}
+
+h1, h2, h3 {
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+}
+
+.token-price {
+    font-size: 2em;
+    color: var(--accent);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+.glitch-text {
+    position: relative;
+    animation: textGlitch 3s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip: rect(0, 900px, 0, 0);
+}
+
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 red;
+    animation: glitch-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    left: -2px;
+    text-shadow: 2px 0 blue;
+    animation: glitch-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-1 {
+    0% { clip: rect(20px, 900px, 21px, 0); }
+    20% { clip: rect(42px, 900px, 73px, 0); }
+    40% { clip: rect(61px, 900px, 100px, 0); }
+    60% { clip: rect(82px, 900px, 89px, 0); }
+    80% { clip: rect(32px, 900px, 54px, 0); }
+    100% { clip: rect(91px, 900px, 120px, 0); }
+}
+
+@keyframes glitch-2 {
+    0% { top: -1px; }
+    20% { top: 2px; }
+    40% { top: -2px; }
+    60% { top: 1px; }
+    80% { top: -3px; }
+    100% { top: 2px; }
+}
+
+.corrupted {
+    animation: corrupt 0.5s steps(2) infinite;
+}
+
+@keyframes corrupt {
+    0% { transform: translate(0); filter: hue-rotate(0deg); }
+    25% { transform: translate(2px, -2px); filter: hue-rotate(90deg); }
+    50% { transform: translate(-2px, 2px); filter: hue-rotate(180deg); }
+    75% { transform: translate(1px, -1px); filter: hue-rotate(270deg); }
+    100% { transform: translate(0); filter: hue-rotate(360deg); }
+}
+
+.nft-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.nft-card {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--accent);
+    transition: all 0.3s ease;
+}
+
+.nft-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: hue-rotate(0deg);
+    transition: filter 0.3s ease;
+}
+
+.nft-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--accent);
+}
+
+.nft-card:hover img {
+    animation: nftGlitch 0.5s infinite;
+}
+
+@keyframes nftGlitch {
+    0% { filter: hue-rotate(0deg) brightness(1); }
+    25% { filter: hue-rotate(90deg) brightness(1.2); }
+    50% { filter: hue-rotate(180deg) brightness(0.8); }
+    75% { filter: hue-rotate(270deg) brightness(1.2); }
+    100% { filter: hue-rotate(360deg) brightness(1); }
+}
+
+.nft-description {
+    padding: 1rem;
+    background: rgba(0,0,0,0.8);
+    color: var(--text);
+    font-size: 0.9em;
+    text-align: left;
+    border-top: 1px solid var(--accent);
+}
+
+.nft-title {
+    color: var(--accent);
+    font-size: 1.2em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+</style>
+</head>
+<body class="crt">
+    <div id="warningModal" class="warning-modal">
+        <div class="warning-content">
+            <h2>⚠️ Warning: Flashing Content</h2>
+            <p>This website contains flashing images and CURSES that may trigger seizures in people with photosensitive (DEMONIC) epilepsy.<p>
+
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+            <button id="acceptButton" class="warning-button">I understand, continue to site</button>
+        </div>
+    </div>
+    <header class="header corrupted">
+        <h1 class="glitch-text" data-text="YourBodyMyChoiceHandmaidenInu">YourBodyMyChoiceHandmaidenInu</h1>
+        <p class="glitch-text" data-text="THE BREEDING FARMS WILL BE TOKENIZED (FICTION)">THE REVOLUTION WILL BE TOKENIZED</p>
+        <div class="token-price corrupted">$YBMCHI: $0.0000001</div>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="https://solscan.io/">Chart</a></li>
+            <li><a href="https://pump.fun">Buy Now</a></li>
+            <li><a href="https://t.me/YBMCHI">Telegram</a></li>
+            <li><a href="https://twitter.com">Twitter</a></li>
+        </ul>
+    </nav>
+
+    <main class="main">
+        <section class="hero">
+            <h2 style="color: var(--accent)">100% BDSM Launch - All Females Ethically Sourced - LP Locked Forever</h2>
+            <h2></h2>
+            <p>The first MEMECOIN / NFT PROJECT dedicated to the creation of Scarlet Sin Stations (NOT REAL) in Wyoming</p>
+            <div style="color: var(--accent)">Join The Red Center - The Future Of Crimson Carnality Hubs</div>
+        </section>
+
+        <section class="hero" style="margin-bottom: 2rem;">
+            <h2 class="glitch-text" data-text="RED CENTRE NFT COLLECTION">RED CENTRE NFT COLLECTION</h2>
+            <p style="color: var(--accent);">PURELY FICTIONAL (REAL) DIGITAL WOMAN COLLECTION*</p>
+            <div class="feature-card" style="max-width: 800px; margin: 1rem auto;">
+                <p>Each NFT represents one unique human digital female (SO REAL) containing completely fictional and imaginary working vagina.exe and womb.sh, as well as protocols to our absolutely made-up network of resistance breeding-farms and supply routes.</p>
+                <p style="color: var(--accent);">FOR ENTERTAINMENT AND ROLEPLAY PURPOSES ONLY.</p>
+                <p>In a totally hypothetical dystopian future scenario that is 100% speculative fiction (INSPIRED BY THE GOATSEE GOSPELS AND THE WONDERFUL AND BEAUTIFUL Ms. Margaret Atwood), these NFTs provide their holders with with emergency access to REAL LIFE (FAKE), vagina.exe and womb.sh, and secure communication channels within our completely imaginary (OR IS IT) underground network.</p>
+                <div style="font-size: 0.8em; margin-top: 1rem; color: var(--text);">
+                    * All content is purely fictional, satirical, and speculative. No real locations, services, or networks exist or are implied. For entertainment purposes only.
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>Tokenomics</h3>
+                <p>0% Tax<br> A COMPLETE WORK OF ART <br>5% To Cummunity</p>
+            </div>
+            <div class="feature-card">
+                <h3>Mission</h3>
+                <p>Every transaction supports tracking digital women with gps ear-ring airtags in Federally Registered Red Centers</p>
+            </div>
+            <div class="feature-card">
+                <h3>Cummunity</h3>
+                <p>Built by horny male anons, for horny female anons. Power to the people.</p>
+            </div>
+        </section>
+
+        <section class="nft-gallery">
+            <div class="nft-card">
+                <img src="/5.png" alt="Glitch art NFT - digital abstract composition #5" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Safe Haven Protocol #01</div>
+                    <p>Access code: GILEAD-5529-ALPHA. Coordinates to Bunker 1 of the Resistance Ranch Network. Survival guaranteed. TOTALLY FICTIONAL.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/6.png" alt="Glitch art NFT - digital abstract composition #6" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Underground Railroad Pass #02</div>
+                    <p>Quantum-encrypted passage through the New Border. Clearance level: OMEGA. For roleplay purposes only.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/9.png" alt="Glitch art NFT - digital abstract composition #9" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Sanctuary Blueprint #03</div>
+                    <p>Architectural plans for Wing C. Medical bay access. Emergency provisions included. This is a work of fiction.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/10.png" alt="Glitch art NFT - digital abstract composition #10" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Freedom Key #04</div>
+                    <p>Emergency extraction protocol. Activation phrase: "BLESSED BE THE FIGHT." Pure fantasy, not real.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/11.png" alt="Glitch art NFT - digital abstract composition #11" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Resistance Radio #05</div>
+                    <p>Secure comms frequency: 101.1FM. Dead drop locations encoded. Completely imaginary scenario.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/12.png" alt="Glitch art NFT - digital abstract composition #12" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Supply Chain #06</div>
+                    <p>Medical supply route access. Password: MAYDAY-ECHO-DELTA. Not intended for actual use.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/13.png" alt="Glitch art NFT - digital abstract composition #13" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Safe House Map #07</div>
+                    <p>Network of 42 resistance outposts. Activation code: NIGHTFALL. Fictional resistance scenario.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/14.png" alt="Glitch art NFT - digital abstract composition #14" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Digital Identity #08</div>
+                    <p>New identity package. Includes documentation. Remember: 2+2=5. Purely speculative fiction.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/Pasted image.png" alt="Glitch art NFT - digital abstract composition" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Emergency Protocol #09</div>
+                    <p>Last resort extraction plan. Coordinates: [REDACTED]. This is not a real plan.*</p>
+                </div>
+            </div>
+            <div class="nft-card">
+                <img src="/2.png" alt="Glitch art NFT - digital abstract composition #2" width="200" height="200">
+                <div class="nft-description">
+                    <div class="nft-title">Sanctuary Access #10</div>
+                    <p>Full clearance to all resistance facilities. Master key: LIBERTY-PRIME. Fictional access only.*</p>
+                </div>
+            </div>
+        </section>
+        <div style="text-align: center; margin-top: 2rem; font-size: 0.8em; color: var(--accent);">
+            * All NFT content is purely fictional and for entertainment purposes only. No real locations or services are provided or implied.
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>$YBMCHI © 2024 | THE FUTURE IS (PREGNANT) FEMALES</p>
+    </footer>
+<script>
+// Create an object to store all our interval IDs
+let animationIntervals = {
+    bodyGlitch: null,
+    corruption: null,
+    colorFlash: null,
+    textCorruption: null,
+    elementShake: null,
+    staticNoise: null
+};
+
+// Function to start all animations
+function startAnimations() {
+    // Feature card hover effect
+    document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        });
+    });
+
+    // Body glitch effect
+    animationIntervals.bodyGlitch = setInterval(() => {
+        document.body.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px) rotate(${Math.random() * 0.5}deg)`;
+        setTimeout(() => {
+            document.body.style.transform = '';
+        }, 50);
+    }, 1000);
+
+    // Corruption effect
+    animationIntervals.corruption = setInterval(() => {
+        const elements = document.querySelectorAll('.corrupted');
+        elements.forEach(el => {
+            el.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px) skew(${Math.random() * 20 - 10}deg)`;
+            el.style.filter = `hue-rotate(${Math.random() * 360}deg) saturate(${Math.random() * 10 + 1}) blur(${Math.random() * 2}px)`;
+            setTimeout(() => {
+                el.style.transform = '';
+                el.style.filter = '';
+            }, 150);
+        });
+    }, 500);
+
+    // Color flashes
+    animationIntervals.colorFlash = setInterval(() => {
+        if(Math.random() > 0.85) {
+            document.body.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, ${Math.random() * 10}%)`;
+            document.body.style.filter = `invert(${Math.random() > 0.5 ? 100 : 0}%)`;
+            setTimeout(() => {
+                document.body.style.backgroundColor = '';
+                document.body.style.filter = '';
+            }, 100);
+        }
+    }, 50);
+
+    // Text corruption
+    animationIntervals.textCorruption = setInterval(() => {
+        const chars = '!@#$%^&*()_+{}:"<>?₿ΞΔΩΨ';
+        document.querySelectorAll('.glitch-text').forEach(el => {
+            if(Math.random() > 0.8) {
+                const originalText = el.getAttribute('data-text');
+                el.textContent = originalText.split('').map(char => 
+                    Math.random() > 0.7 ? chars[Math.floor(Math.random() * chars.length)] : char
+                ).join('');
+                setTimeout(() => {
+                    el.textContent = originalText;
+                }, 150);
+            }
+        });
+    }, 50);
+
+    // Element shake
+    animationIntervals.elementShake = setInterval(() => {
+        const allElements = document.querySelectorAll('*');
+        const randomElement = allElements[Math.floor(Math.random() * allElements.length)];
+        randomElement.style.transform = `translate(${Math.random() * 10 - 5}px, ${Math.random() * 10 - 5}px)`;
+        setTimeout(() => {
+            randomElement.style.transform = '';
+        }, 100);
+    }, 200);
+
+    // Static noise
+    const staticNoise = () => {
+        const noise = document.createElement('div');
+        noise.style.position = 'fixed';
+        noise.style.top = '0';
+        noise.style.left = '0';
+        noise.style.width = '100%';
+        noise.style.height = '100%';
+        noise.style.backgroundColor = `rgba(255,255,255,${Math.random() * 0.1})`;
+        noise.style.mixBlendMode = 'difference';
+        noise.style.pointerEvents = 'none';
+        noise.style.zIndex = '9999';
+        document.body.appendChild(noise);
+        setTimeout(() => noise.remove(), 50);
+    };
+    animationIntervals.staticNoise = setInterval(staticNoise, 100);
+}
+
+// Function to stop all animations
+function stopAnimations() {
+    // Clear all intervals
+    Object.values(animationIntervals).forEach(interval => {
+        if (interval) clearInterval(interval);
+    });
+    
+    // Reset all animation-related styles
+    document.body.style = '';
+    document.querySelectorAll('.corrupted, .glitch-text, *').forEach(el => {
+        el.style = '';
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Add animations-disabled class by default
+    document.body.classList.add('animations-disabled');
+    stopAnimations(); // Make sure all animations are stopped initially
+    
+    const warningModal = document.getElementById('warningModal');
+    const acceptButton = document.getElementById('acceptButton');
+    
+    acceptButton.addEventListener('click', function() {
+        // Remove the warning modal
+        warningModal.style.display = 'none';
+        // Enable animations
+        document.body.classList.remove('animations-disabled');
+        startAnimations(); // Start all animations
+    });
+});
+</script>
+
+</body>
+</html>
